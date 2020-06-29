@@ -12,6 +12,7 @@ interface AppProps {
 
 export default class App extends React.Component<AppProps> {
   render() {
+    console.log(routes)
     return (
       <ConfigProvider locale={zhCN}>
         <AppLayout createConfig={this.props.createConfig}>

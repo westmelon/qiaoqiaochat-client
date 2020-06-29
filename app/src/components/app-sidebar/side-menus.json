@@ -28,5 +28,11 @@
     "href": "#/about",
     "title": "About",
     "icon": "information"
+  },
+  {
+    "key": "Chat",
+    "href": "#/chat",
+    "title": "chat",
+    "icon": "information"
   }
 ]

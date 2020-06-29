@@ -1,5 +1,5 @@
 import path from 'path'
-import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron'
+import { BrowserWindow, BrowserWindowConstructorOptions, ipcMain } from 'electron'
 import { log } from '../log'
 import routes from '@/src/auto-routes'
 
@@ -77,6 +77,11 @@ export function createWindow(key: RouterKey, options: CreateWindowOptions = {}):
     const url = getWindowUrl(key, options)
     windowList.set(key, win)
     win.loadURL(url)
+
+    ipcMain.on('closed', () => {
+      console.log(666)
+      win.close()
+    })
 
     if (createConfig.saveWindowBounds) {
       const lastBounds = $tools.settings.windowBounds.get(key)
