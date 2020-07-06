@@ -39,16 +39,24 @@ export default class Chat extends React.Component<ChatProps, ChatState> {
   render() {
     const data = [
       {
-        title: 'Ant Design Title 1',
+        title: 'doudou',
+        avatar: '',
+        shortcut: 'nihao',
       },
       {
-        title: 'Ant Design Title 2',
+        title: 'nini',
+        avatar: '',
+        shortcut: 'nihao',
       },
       {
-        title: 'Ant Design Title 3',
+        title: 'tutu',
+        avatar: '',
+        shortcut: 'nihao',
       },
       {
-        title: 'Ant Design Title 40',
+        title: 'jack',
+        avatar: '',
+        shortcut: 'nihao',
       },
     ]
     const { message: msg } = this.props
@@ -63,9 +71,9 @@ export default class Chat extends React.Component<ChatProps, ChatState> {
               renderItem={item => (
                 <List.Item>
                   <List.Item.Meta
-                    avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                    avatar={<Avatar src={item.avatar} />}
                     title={<p>{item.title}</p>}
-                    description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                    description={item.shortcut}
                   />
                 </List.Item>
               )}

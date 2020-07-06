@@ -20,6 +20,9 @@ export interface CreateWindowOptions {
 /** 已创建的窗口列表 */
 export const windowList: Map<RouterKey, BrowserWindow> = new Map()
 
+const status = {
+  isLogin: false,
+}
 /**
  * 通过 routes 中的 key(name) 得到 url
  * @param key
@@ -42,6 +45,22 @@ export function getWindowUrl(key: RouterKey, options: CreateWindowOptions = {}):
   }
 }
 
+ipcMain.on('closed', () => {
+  console.log(666)
+  const www = windowList.get('Login')
+  if (www) {
+    status.isLogin = true
+    www.close()
+  }
+})
+
+export function createMainWindow(options: CreateWindowOptions = {}): Promise<BrowserWindow> {
+  if (status.isLogin) {
+    return createWindow('Home', options)
+  } else {
+    return createWindow('Login', options)
+  }
+}
 /**
  * 创建一个新窗口
  * @param key
@@ -77,11 +96,6 @@ export function createWindow(key: RouterKey, options: CreateWindowOptions = {}):
     const url = getWindowUrl(key, options)
     windowList.set(key, win)
     win.loadURL(url)
-
-    ipcMain.on('closed', () => {
-      console.log(666)
-      win.close()
-    })
 
     if (createConfig.saveWindowBounds) {
       const lastBounds = $tools.settings.windowBounds.get(key)
@@ -132,7 +146,7 @@ export function createWindow(key: RouterKey, options: CreateWindowOptions = {}):
  */
 export function activeWindow(key: RouterKey): BrowserWindow | false {
   const win: BrowserWindow | undefined = windowList.get(key)
-
+  console.log(key)
   if (win) {
     win.show()
     return win

@@ -41,7 +41,7 @@ module.exports = {
 
   rules: {
     'no-console': 'off', // 禁用 console
-    'no-debugger': 'error', // 禁用 debugger
+    // 'no-debugger': 'error', // 禁用 debugger
     'no-alert': 'error', // 禁用 alert
 
     indent: ['error', 2, { SwitchCase: 1 }], // 强制使用两个空格作为缩进
@@ -66,5 +66,6 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 1,
     '@typescript-eslint/no-unused-vars': 1, // 导入内容未使用
     '@typescript-eslint/camelcase': 1,
+    '@typescript-eslint/no-inferrable-types': 0,
   },
 }

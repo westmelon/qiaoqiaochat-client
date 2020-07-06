@@ -1,4 +1,4 @@
-import { AnyAction } from 'redux'
+import { AnyAction, Dispatch as AnyDispatch } from 'redux'
 
 declare global {
   type StoreActionsKeys = keyof StoreActions
@@ -23,6 +23,7 @@ declare global {
   type Dispatch = <T extends StoreActionsKeys>(options: StoreAction<T> | AsyncDispatch) => Promise<void> | void
   interface StoreProps {
     readonly dispatch: Dispatch
+    readonly anyDispatch: AnyDispatch
   }
 
   const $store: AppStore

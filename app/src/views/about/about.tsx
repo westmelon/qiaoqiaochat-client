@@ -2,8 +2,25 @@ import React from 'react'
 import { shell } from 'electron'
 
 import './about.less'
+import { IpcService } from '../../../electron/ipc/IpcService'
+
+const ipc = new IpcService()
 
 export default class About extends React.Component<PageProps> {
+  state = {
+    system: '',
+  }
+
+  async systeminfo(): Promise<{ kernel: string }> {
+    const t = await ipc.send<{ kernel: string }>('system-info')
+    return t
+  }
+
+  async componentDidMount() {
+    const a = await this.systeminfo()
+    this.setState({ system: a.kernel })
+  }
+
   render() {
     return (
       <div className="about flex column center" style={{ height: '100%' }}>
@@ -23,6 +40,7 @@ export default class About extends React.Component<PageProps> {
           </a>{' '}
           All rights (demo)
         </p>
+        <p>{this.state.system}</p>
       </div>
     )
   }

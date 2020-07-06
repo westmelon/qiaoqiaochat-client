@@ -14,6 +14,7 @@ const routes: RouteConfig[] = [
     createConfig: {
       showTitlebar: false,
       hideMenus: true,
+      openDevTools: true,
     },
   },
 ]

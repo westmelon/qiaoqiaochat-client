@@ -14,6 +14,12 @@ declare namespace NodeJS {
     API_HOST: string
     /** API 根路径 */
     API_BASE_PATH: string
+    /** websocket 协议 */
+    WS_PROTOCOL: string
+    /** websocket 域名 */
+    WS_HOST: string
+    /** websocket 根路径 */
+    WS_BASE_PATH: string
   }
 }
 

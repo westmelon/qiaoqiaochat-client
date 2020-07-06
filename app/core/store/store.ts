@@ -1,11 +1,15 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
+import messageMi from './messageMiddleware'
 import { reducer, initialState } from './reducers/auto-reducer'
+import reduxWebsocket from '../websocket/index'
 
-export const store = createStore<StoreStates, StoreAction<StoreActionsKeys>, {}, {}>(
+const reduxWebsocketMiddleware = reduxWebsocket({ serializer: payload => payload })
+
+export const store = createStore<StoreStates, any, {}, {}>(
   reducer,
   initialState,
-  applyMiddleware(thunk)
+  applyMiddleware(thunk, messageMi, reduxWebsocketMiddleware)
 )
 
 declare global {

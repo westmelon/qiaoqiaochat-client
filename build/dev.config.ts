@@ -18,6 +18,9 @@ const devConfig = {
         API_PROTOCOL: 'http://',
         API_HOST: 'yapi.demo.qunar.com',
         API_BASE_PATH: '/mock/55986',
+        WS_PROTOCOL: 'ws://',
+        WS_HOST: '124.70.210.202:8800',
+        WS_BASE_PATH: '/ws',
       },
     },
 
@@ -25,8 +28,11 @@ const devConfig = {
     dev: {
       variables: {
         API_PROTOCOL: 'http://',
-        API_HOST: 'yapi.demo.qunar.com',
-        API_BASE_PATH: '/mock/55986',
+        API_HOST: '124.70.210.202:8080',
+        API_BASE_PATH: '',
+        WS_PROTOCOL: 'ws://',
+        WS_HOST: '124.70.210.202:8800',
+        WS_BASE_PATH: '/ws',
       },
     },
 
@@ -34,8 +40,11 @@ const devConfig = {
     prod: {
       variables: {
         API_PROTOCOL: 'http://',
-        API_HOST: 'yapi.demo.qunar.com',
-        API_BASE_PATH: '/mock/55986',
+        API_HOST: '124.70.210.202:8080',
+        API_BASE_PATH: '',
+        WS_PROTOCOL: 'ws://',
+        WS_HOST: '124.70.210.202:8800',
+        WS_BASE_PATH: '/ws',
       },
     },
   },

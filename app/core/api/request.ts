@@ -56,8 +56,8 @@ export async function request(apiPath: string, params?: RequestParams, optionsSo
     .then(res => {
       const data: any = res.data
 
-      if (!checkStatus || data.code == 200) {
-        return data
+      if (!checkStatus || data.code == 0) {
+        return data.data
       } else {
         return Promise.reject(data)
       }

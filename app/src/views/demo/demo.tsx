@@ -97,7 +97,7 @@ export default class Demo extends React.Component<DemoProps, DemoState> {
                 Request
               </Button>
 
-              <Button className="ml-16" type="primary" onClick={this.requestTestError.bind(this)}>
+              <Button className="ml-16" type="primary" onClick={this.requestTestError}>
                 Request Error (notification)
               </Button>
 
