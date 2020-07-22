@@ -20,9 +20,10 @@ message Model {
   string requestId = 13;
   string responseId = 14;
   string uniqueId = 15;
+  string identifier = 16;
 
-  uint32 clientType = 16;
-  string clientVersion = 17;
-  uint32 encryptionType = 18;
+  uint32 clientType = 17;
+  string clientVersion = 18;
+  uint32 encryptionType = 19;
 
 }

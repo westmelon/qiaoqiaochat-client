@@ -47,6 +47,9 @@ export interface IModel {
     /** Model uniqueId */
     uniqueId?: (string|null);
 
+    /** Model identifier */
+    identifier?: (string|null);
+
     /** Model clientType */
     clientType?: (number|null);
 
@@ -110,6 +113,9 @@ export class Model implements IModel {
 
     /** Model uniqueId. */
     public uniqueId: string;
+
+    /** Model identifier. */
+    public identifier: string;
 
     /** Model clientType. */
     public clientType: number;

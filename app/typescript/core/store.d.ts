@@ -25,12 +25,4 @@ declare global {
     readonly dispatch: Dispatch
     readonly anyDispatch: AnyDispatch
   }
-
-  const $store: AppStore
-
-  namespace NodeJS {
-    interface Global {
-      __$store: AppStore
-    }
-  }
 }

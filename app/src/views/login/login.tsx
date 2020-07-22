@@ -1,12 +1,10 @@
 import React from 'react'
 import { Form, Input, Button, Checkbox, Card } from 'antd'
 import { withStore } from '@/src/components'
-// import { connect, shakehands } from '../../../core/websocket/index2'
 import { IpcService } from '@/electron/ipc/IpcService'
 import { IpcResponse } from '@/electron/ipc/IpcResponse'
 const electron = window.require('electron')
 const { ipcRenderer } = electron
-
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -38,8 +36,8 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     return t
   }
 
-  async shakehands(): Promise<IpcResponse> {
-    const t = await ipc.send<IpcResponse>('websocket-shakehands')
+  async shakehands(token: string): Promise<IpcResponse> {
+    const t = await ipc.send<IpcResponse>('websocket-shakehands', { params: [token] })
     return t
   }
 
@@ -48,9 +46,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     content: '登陆',
   }
 
-  componentDidMount = () => {
-    console.log($store)
-  }
+  componentDidMount = () => {}
 
   //异步函数
   asyncDispatch = (dispatch: Dispatch) => {
@@ -73,10 +69,9 @@ export default class Login extends React.Component<LoginProps, LoginState> {
       const data = await $api.request('/auth/login', values)
       //建立socket连接
       await this.connect()
-
       //sock连接验证
-      // await shakehands(data.token)
-      // this.doLoginSuccess(values.account, data.token)
+      await this.shakehands(data.token)
+      this.doLoginSuccess(values.account, data.token)
     } catch (e) {
       console.log(e)
     } finally {
@@ -92,7 +87,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
         isLogin: true,
       },
     })
-    // ipcRenderer.send('closed')
+    ipcRenderer.send('closed')
     $tools.createWindow('Home')
   }
 

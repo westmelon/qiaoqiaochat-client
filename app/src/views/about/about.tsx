@@ -1,11 +1,9 @@
 import React from 'react'
 import { shell } from 'electron'
-
 import './about.less'
 import { IpcService } from '../../../electron/ipc/IpcService'
 
 const ipc = new IpcService()
-
 export default class About extends React.Component<PageProps> {
   state = {
     system: '',

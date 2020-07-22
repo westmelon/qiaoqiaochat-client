@@ -2,7 +2,7 @@ import path from 'path'
 import { BrowserWindow, BrowserWindowConstructorOptions, ipcMain } from 'electron'
 import { log } from '../log'
 import routes from '@/src/auto-routes'
-
+import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-installer'
 const { NODE_ENV, port, host } = process.env
 
 /** 创建新窗口相关选项 */
@@ -46,7 +46,7 @@ export function getWindowUrl(key: RouterKey, options: CreateWindowOptions = {}):
 }
 
 ipcMain.on('closed', () => {
-  console.log(666)
+  //todo
   const www = windowList.get('Login')
   if (www) {
     status.isLogin = true
@@ -67,6 +67,9 @@ export function createMainWindow(options: CreateWindowOptions = {}): Promise<Bro
  * @param options
  */
 export function createWindow(key: RouterKey, options: CreateWindowOptions = {}): Promise<BrowserWindow> {
+  installExtension(REDUX_DEVTOOLS)
+    .then(name => console.log(`Added Extension:  ${name}`))
+    .catch(err => console.log('An error occurred: ', err))
   return new Promise(resolve => {
     const routeConfig: RouteConfig | AnyObj = routes.get(key) || {}
 

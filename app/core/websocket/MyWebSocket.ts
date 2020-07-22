@@ -1,16 +1,13 @@
-import { Serializer } from './types'
 import WebSocket from 'ws'
 interface ReduxWebSocketOptions {
   reconnectInterval: number
   reconnectOnClose: boolean
   onOpen?: (s: WebSocket) => void
-  serializer?: Serializer
 }
 
 const defaultOptions = {
   reconnectInterval: 2000,
   reconnectOnClose: false,
-  serializer: (msg: string) => msg,
 }
 
 /**
@@ -110,11 +107,7 @@ export default class MyWebSocket {
    */
   send = (msg: any) => {
     if (this.websocket) {
-      if (this.options.serializer) {
-        this.websocket.send(this.options.serializer(msg))
-      } else {
-        throw new Error('Serializer not provided')
-      }
+      this.websocket.send(msg)
     } else {
       throw new Error('Socket connection not initialized. please connect first')
     }
@@ -176,7 +169,6 @@ export default class MyWebSocket {
   private baseHandleMessage = (event: { data: any; type: string; target: WebSocket }) => {
     //处理消息
     this.handleMessage(event.data)
-    console.log(event)
   }
 
   /**

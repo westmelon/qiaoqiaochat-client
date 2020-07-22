@@ -1,4 +1,6 @@
 import { Model as QiaoQiaoHua, IModel } from './compiled'
+import { v4 as uuidv4 } from 'uuid'
+
 import {
   COMMAND_CONNECT,
   COMMAND_CLOSE,
@@ -25,7 +27,7 @@ export const decode = (buffer: Uint8Array): QiaoQiaoHua => {
 }
 
 //发消息
-export const sendMessage = (baseParam: IModel) => {
+export const chatMsg = (baseParam: IModel) => {
   return messageGenerater(baseParam, COMMAND_MESSAGE, MESSAGE_SEND)
 }
 
@@ -47,6 +49,12 @@ export const replyMsg = (qiaoqiaohua: QiaoQiaoHua): QiaoQiaoHua | null => {
   return null
 }
 
+export const isMessage = (qiaoqiaohua: QiaoQiaoHua): boolean => {
+  const cmd = qiaoqiaohua.cmd
+  const msgType = qiaoqiaohua.msgType
+  return cmd == COMMAND_MESSAGE && (msgType == MESSAGE_SEND || msgType == MESSAGE_SEND_REPLY)
+}
+
 //心跳包
 const heartbeatMsg = (): QiaoQiaoHua => {
   console.log('heartbeat')
@@ -63,7 +71,8 @@ const messageGenerater = (baseParam: IModel, cmd: number, msgType = 0) => {
   const qiaoqiaohua = create(baseParam)
   qiaoqiaohua.cmd = cmd
   qiaoqiaohua.msgType = msgType
-  qiaoqiaohua.timestamp = new Date().getTime
+  qiaoqiaohua.timestamp = new Date().getTime()
   qiaoqiaohua.groupId = ''
+  qiaoqiaohua.requestId = uuidv4()
   return qiaoqiaohua
 }

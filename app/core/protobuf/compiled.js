@@ -30,6 +30,7 @@ $root.Model = (function() {
      * @property {string|null} [requestId] Model requestId
      * @property {string|null} [responseId] Model responseId
      * @property {string|null} [uniqueId] Model uniqueId
+     * @property {string|null} [identifier] Model identifier
      * @property {number|null} [clientType] Model clientType
      * @property {string|null} [clientVersion] Model clientVersion
      * @property {number|null} [encryptionType] Model encryptionType
@@ -171,6 +172,14 @@ $root.Model = (function() {
     Model.prototype.uniqueId = "";
 
     /**
+     * Model identifier.
+     * @member {string} identifier
+     * @memberof Model
+     * @instance
+     */
+    Model.prototype.identifier = "";
+
+    /**
      * Model clientType.
      * @member {number} clientType
      * @memberof Model
@@ -248,12 +257,14 @@ $root.Model = (function() {
             writer.uint32(/* id 14, wireType 2 =*/114).string(message.responseId);
         if (message.uniqueId != null && Object.hasOwnProperty.call(message, "uniqueId"))
             writer.uint32(/* id 15, wireType 2 =*/122).string(message.uniqueId);
+        if (message.identifier != null && Object.hasOwnProperty.call(message, "identifier"))
+            writer.uint32(/* id 16, wireType 2 =*/130).string(message.identifier);
         if (message.clientType != null && Object.hasOwnProperty.call(message, "clientType"))
-            writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.clientType);
+            writer.uint32(/* id 17, wireType 0 =*/136).uint32(message.clientType);
         if (message.clientVersion != null && Object.hasOwnProperty.call(message, "clientVersion"))
-            writer.uint32(/* id 17, wireType 2 =*/138).string(message.clientVersion);
+            writer.uint32(/* id 18, wireType 2 =*/146).string(message.clientVersion);
         if (message.encryptionType != null && Object.hasOwnProperty.call(message, "encryptionType"))
-            writer.uint32(/* id 18, wireType 0 =*/144).uint32(message.encryptionType);
+            writer.uint32(/* id 19, wireType 0 =*/152).uint32(message.encryptionType);
         return writer;
     };
 
@@ -334,12 +345,15 @@ $root.Model = (function() {
                 message.uniqueId = reader.string();
                 break;
             case 16:
-                message.clientType = reader.uint32();
+                message.identifier = reader.string();
                 break;
             case 17:
-                message.clientVersion = reader.string();
+                message.clientType = reader.uint32();
                 break;
             case 18:
+                message.clientVersion = reader.string();
+                break;
+            case 19:
                 message.encryptionType = reader.uint32();
                 break;
             default:
@@ -422,6 +436,9 @@ $root.Model = (function() {
         if (message.uniqueId != null && message.hasOwnProperty("uniqueId"))
             if (!$util.isString(message.uniqueId))
                 return "uniqueId: string expected";
+        if (message.identifier != null && message.hasOwnProperty("identifier"))
+            if (!$util.isString(message.identifier))
+                return "identifier: string expected";
         if (message.clientType != null && message.hasOwnProperty("clientType"))
             if (!$util.isInteger(message.clientType))
                 return "clientType: integer expected";
@@ -486,6 +503,8 @@ $root.Model = (function() {
             message.responseId = String(object.responseId);
         if (object.uniqueId != null)
             message.uniqueId = String(object.uniqueId);
+        if (object.identifier != null)
+            message.identifier = String(object.identifier);
         if (object.clientType != null)
             message.clientType = object.clientType >>> 0;
         if (object.clientVersion != null)
@@ -534,6 +553,7 @@ $root.Model = (function() {
             object.requestId = "";
             object.responseId = "";
             object.uniqueId = "";
+            object.identifier = "";
             object.clientType = 0;
             object.clientVersion = "";
             object.encryptionType = 0;
@@ -571,6 +591,8 @@ $root.Model = (function() {
             object.responseId = message.responseId;
         if (message.uniqueId != null && message.hasOwnProperty("uniqueId"))
             object.uniqueId = message.uniqueId;
+        if (message.identifier != null && message.hasOwnProperty("identifier"))
+            object.identifier = message.identifier;
         if (message.clientType != null && message.hasOwnProperty("clientType"))
             object.clientType = message.clientType;
         if (message.clientVersion != null && message.hasOwnProperty("clientVersion"))
