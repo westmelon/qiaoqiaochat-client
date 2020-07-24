@@ -13,20 +13,6 @@ export function ACTION_CHAT_SEND_MESSAGE(
   state: StoreStates,
   action: StoreAction<'ACTION_CHAT_SEND_MESSAGE'>
 ): { chat: ChatWrapper } {
-  console.log({ state, action })
-
-  //把发送的消息放进聊天列表中
-  //把消息放到所有的消息中
-  // const newMessage = new Map<string, MessageType>(state.message.send)
-  // const message = new Message()
-  // const data = action.data
-  // message.uniqueId = uuidv4()
-  // message.sender = data.sender
-  // message.timestamp = new Date().getTime()
-  // message.content = data.message
-  // message.receiver = data.receiver
-  // newMessage.set(message.uniqueId, message)
-
   const receiver = action.data.receiver
   const chatContent = Object.assign({}, state.chat)
   let chat = new Chat(receiver)
@@ -34,10 +20,9 @@ export function ACTION_CHAT_SEND_MESSAGE(
     chat = chatContent[receiver]
   }
   const messages: Array<string> = chat.messages
-  console.log(chat)
-  console.log(chat.messages)
-  messages.push(action.data.id)
-
+  if (!(action.data.id in messages)) {
+    messages.push(action.data.id)
+  }
   return { chat: chatContent }
 }
 
@@ -55,7 +40,9 @@ export function ACTION_CHAT_RECEIVE_MESSAGE(
   const chatContent = Object.assign({}, state.chat)
   const chat = getChat(chatContent, receiver)
   const messages: Array<string> = chat.messages
-  messages.push(id)
+  if (!(id in messages)) {
+    messages.push(id)
+  }
   return { chat: chatContent }
 }
 
@@ -81,7 +68,7 @@ export function ACTION_CHAT_RECEIVE_MESSAGE_REPLY(
       return msgId
     }
   })
-  chat.messages = newMessages
+  chat.messages = [...new Set(newMessages)]
   return { chat: chatContent }
 }
 

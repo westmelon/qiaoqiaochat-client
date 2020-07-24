@@ -25,13 +25,24 @@ const devConfig = {
     },
 
     // dev 环境变量 (npm run dev 将使用此配置)
+    // dev: {
+    //   variables: {
+    //     API_PROTOCOL: 'http://',
+    //     API_HOST: '124.70.210.202',
+    //     API_BASE_PATH: 'web',
+    //     WS_PROTOCOL: 'ws://',
+    //     WS_HOST: '124.70.210.202',
+    //     WS_BASE_PATH: '/ws',
+    //   },
+    // },
+
     dev: {
       variables: {
         API_PROTOCOL: 'http://',
-        API_HOST: '124.70.210.202',
+        API_HOST: '127.0.0.1:8081',
         API_BASE_PATH: 'web',
         WS_PROTOCOL: 'ws://',
-        WS_HOST: '124.70.210.202',
+        WS_HOST: '127.0.0.1:8800',
         WS_BASE_PATH: '/ws',
       },
     },

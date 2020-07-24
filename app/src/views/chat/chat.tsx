@@ -39,6 +39,7 @@ export default class Chat extends React.Component<ChatProps, ChatState> {
   chat() {
     const id = uuidv4()
     const baseParam = {
+      sender: 'nini',
       receiver: this.state.friend,
       textContent: this.state.message,
       identifier: id,

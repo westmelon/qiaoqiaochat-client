@@ -4,7 +4,7 @@ import zhCN from 'antd/es/locale/zh_CN'
 const electron = window.require('electron')
 const { ipcRenderer } = electron
 import { AppRouter, AppLayout, withStore } from '@/src/components'
-import { MessageType } from '@/core/store/actions/type'
+import { MessageType, Message } from '@/core/store/actions/type'
 import { IModel as QiaoQiaoHua } from '@/core/protobuf/compiled'
 import { MESSAGE_SEND, MESSAGE_SEND_REPLY } from '@/core/protobuf/const'
 import routes from './auto-routes'
@@ -26,9 +26,18 @@ export default class App extends React.Component<AppProps> {
       switch (msgType) {
         case MESSAGE_SEND:
           //普通消息
+          //消息重新封装
+          const message = new Message()
+          message.id = msg.uniqueId ? msg.uniqueId : ''
+          message.content = msg.textContent ? msg.textContent : ''
+          message.sender = msg.sender ? msg.sender : ''
+          message.receiver = msg.receiver ? msg.receiver : ''
+          message.uniqueId = msg.uniqueId ? msg.uniqueId : ''
+          message.timestamp = msg.timestamp ? msg.timestamp : 0
+          message.identifier = msg.identifier ? msg.identifier : ''
           store.dispatch({
             type: 'ACTION_RECEIVE_SERVER_MESSAGE',
-            data: msg,
+            data: message,
           })
           store.dispatch({
             type: 'ACTION_CHAT_RECEIVE_MESSAGE',
@@ -47,10 +56,8 @@ export default class App extends React.Component<AppProps> {
           })
           break
         default:
-          console.log('no messagetype match')
           break
       }
-      console.log('chuliwanbi')
     })
   }
 

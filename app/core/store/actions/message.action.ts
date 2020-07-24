@@ -15,7 +15,6 @@ export function ACTION_RECEIVE_SERVER_MESSAGE(
   //合并消息
   const receive = action.data
   const merge = Object.assign({}, state.message.receive, { [receive.uniqueId]: receive })
-  console.log('--------------------------')
   const rtn = Object.assign({}, state.message, { receive: merge })
   return { message: rtn }
 }
