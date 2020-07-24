@@ -28,10 +28,10 @@ const devConfig = {
     dev: {
       variables: {
         API_PROTOCOL: 'http://',
-        API_HOST: '127.0.0.1:8080',
-        API_BASE_PATH: '',
+        API_HOST: '124.70.210.202',
+        API_BASE_PATH: 'web',
         WS_PROTOCOL: 'ws://',
-        WS_HOST: '127.0.0.1:8800',
+        WS_HOST: '124.70.210.202',
         WS_BASE_PATH: '/ws',
       },
     },
