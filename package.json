@@ -35,7 +35,7 @@
     "@typescript-eslint/eslint-plugin": "^2.22.0",
     "@typescript-eslint/parser": "^2.22.0",
     "antd": "^4.0.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "chalk": "^3.0.0",
     "classnames": "^2.2.6",
     "cross-env": "^7.0.1",
@@ -89,7 +89,7 @@
   },
   "homepage": "https://github.com/lanten/electron-antd#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "protobufjs": "^6.9.0",
     "uuid": "^8.2.0",
     "ws": "^7.3.1"
